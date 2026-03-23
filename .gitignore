@@ -1,0 +1,87 @@
+# ============ 隐私配置 ============
+.env
+config.local.py
+*.secret
+
+# ============ 调试/临时图片 ============
+debug-bg*.jpg
+debug-sprite*.jpg
+diagnose-*.jpg
+1-page-loaded.png
+after-click.png
+after-wait.png
+api-before-click.png
+before-click.png
+captcha-after-reload.png
+captcha-bg.png
+captcha-check*.png
+captcha-crop.png
+captcha-detected.png
+captcha-final-state.png
+captcha-fix-attempt.png
+captcha-frame-check.png
+captcha-full*.png
+captcha-headed*.png
+captcha-hook*.png
+captcha-iframe.png
+captcha-intercept.png
+captcha-now.png
+captcha-only.png
+captcha-page.png
+captcha-refresh.png
+captcha-screenshot*.png
+captcha-state.png
+captcha-trigger.png
+captcha-visible.png
+checkin-debug.png
+checkin-page-after-login.png
+current-*.png
+daily-checkin-before.png
+daily-checkin-result.png
+debug-*.png
+final-state.png
+highlight-test.png
+login-*.png
+persistent-*.png
+rainyun-login.png
+slider-*.png
+stealth-full.png
+step*.png
+tasks-page.png
+tcaptcha-analysis.png
+debug-bg.jpg
+debug-sprite.jpg
+debug-bg-*.jpg
+debug-sprite-*.jpg
+
+# ============ 运行日志/输出 ============
+checkin-output*.txt
+checkin-error*.txt
+checkin-test-*.txt
+checkin-summary.txt
+checkin-output.log
+*.log
+
+# ============ 调试 JSON ============
+all-json-responses.json
+captcha-deep-info.json
+captcha-full-info*.json
+captcha-info.json
+captcha-postmsg-info.json
+captcha-responses.json
+test-api.json
+
+# ============ playwright 数据 ============
+playwright-data/
+
+# ============ Node 依赖 ============
+node_modules/
+
+# ============ WorkBuddy 内部数据 ============
+.workbuddy/
+.codebuddy/
+
+# ============ 其他临时文件 ============
+$null
+page-content.html
+tasks-page.html
