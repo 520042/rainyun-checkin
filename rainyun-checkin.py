@@ -22,7 +22,14 @@ import cv2
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
-import rainyun_src_ICR as ICR
+
+# 青龙面板兼容性：尝试导入 ICR 模块，如果失败则报错
+try:
+    import rainyun_src_ICR as ICR
+except ImportError as e:
+    print(f"[ERR] 无法导入 rainyun_src_ICR 模块: {e}")
+    print("      请确保 rainyun_src_ICR.py 与本脚本在同一目录")
+    sys.exit(1)
 
 # ============ 配置 ============
 # 优先读取环境变量，其次读取同目录 .env 文件
@@ -188,9 +195,14 @@ def complete_captcha(max_retry=5):
         sprite_bytes = requests.get(sprite_url, headers=COMMON_HEADERS, timeout=10).content
         print(f"  BG size: {len(bg_bytes)}, Sprite size: {len(sprite_bytes)}")
         
-        # 保存调试图片
-        with open(f'debug-bg-round{attempt+1}.jpg', 'wb') as f: f.write(bg_bytes)
-        with open(f'debug-sprite-round{attempt+1}.jpg', 'wb') as f: f.write(sprite_bytes)
+        # 保存调试图片（仅在本地环境或 DEBUG 模式下保存）
+        if os.environ.get('RAINYUN_DEBUG') == '1':
+            try:
+                with open(f'debug-bg-round{attempt+1}.jpg', 'wb') as f: f.write(bg_bytes)
+                with open(f'debug-sprite-round{attempt+1}.jpg', 'wb') as f: f.write(sprite_bytes)
+                print(f"  Debug images saved")
+            except Exception as e:
+                print(f"  Warning: Failed to save debug images: {e}")
         
         # 获取POW（每次重新计算）
         collect, eks, pow_answer, pow_time = get_tdc_path_and_solve(data)
@@ -273,8 +285,13 @@ def do_check_in(ticket, randstr):
 # ============ 主流程 ============
 def main():
     print("=" * 50)
-    print("雨云每日签到脚本 v2.0 (纯HTTP模式)")
+    print("雨云每日签到脚本 v2.1 (支持青龙面板)")
     print("=" * 50)
+    
+    # 输出运行环境信息（用于调试）
+    print(f"Python 版本: {sys.version}")
+    print(f"脚本路径: {_SCRIPT_DIR}")
+    print(f"API_KEY 已配置: {'是' if API_KEY else '否'}")
     
     # 1. 检查签到状态
     print("\n[1] 检查签到状态...")
@@ -317,6 +334,6 @@ def main():
         return False
 
 if __name__ == '__main__':
-    os.chdir(r'C:\Users\zhaol\WorkBuddy\Claw')
+    # 青龙面板兼容性：不强制切换工作目录，使用相对路径
     success = main()
     sys.exit(0 if success else 1)
