@@ -51,6 +51,12 @@ python run-checkin.py
 
 ## 自动化（每日定时）
 
+### 方式一：青龙面板（推荐）
+
+本项目已完美支持 [青龙面板](QINGLONG_README.md)，适合需要定时任务和集中管理的场景。
+
+### 方式二：系统定时任务
+
 可配合系统定时任务（Windows 任务计划程序 / Linux cron）每日自动运行：
 
 ```bash
@@ -66,6 +72,7 @@ python run-checkin.py
 | `rainyun_src_ICR.py` | 高精度图像识别模块（TCaptcha 拼图匹配） |
 | `run-checkin.py` | 运行包装器，输出写入日志文件 |
 | `.env.example` | 环境变量配置模板 |
+| `QINGLONG_README.md` | 青龙面板部署指南（适用于定时任务平台） |
 
 ## 算法原理
 
