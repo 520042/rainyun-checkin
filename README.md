@@ -104,7 +104,6 @@ Use Linux cron or Windows Task Scheduler:
 | `run-checkin.py` | Runner wrapper — writes output to a log file |
 | `.env.example` | Environment variable template |
 | `QINGLONG_README.md` | Qinglong Panel deployment guide |
-| `TEST_QINGLONG.md` | Qinglong Panel compatibility test report |
 
 ## How It Works
 
